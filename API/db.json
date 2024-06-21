@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "id": "e074",
+      "username": "thrinath123",
+      "password": "123456",
+      "email": "thrinathpothineni@gmail.com",
+      "pno": "9347001342"
+    },
+    {
+      "id": "4f34",
+      "username": "thrinath123",
+      "password": "123456",
+      "email": "thrinath@gmail.com",
+      "pno": "5421"
+    }
+  ]
+}

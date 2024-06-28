@@ -4,11 +4,13 @@ function UserLoginStore({ children }) {
   //login user state
   let [currentUser, setCurrentUser] = useState(null);
   let [userLoginStatus,setUserLoginStatus]=useState(false)
+  let [err,seterr]=useState('')
 
   //user login
   async function loginUser(userCred) {
+    try{
     let res = await fetch(
-      `http://localhost:3000/users?username=${userCred.username}&password=${userCred.password}`
+      `https://user-api-q5az.onrender.com/users?username=${userCred.username}&&password=${userCred.password}`
     );
     let usersList = await res.json();
     console.log("users list",usersList)
@@ -17,10 +19,15 @@ function UserLoginStore({ children }) {
       console.log("invalid user")
       setCurrentUser(null)
       setUserLoginStatus(false)
+      seterr('Invalid Username/Password')
     } else {
       setCurrentUser(usersList[0]);
       setUserLoginStatus(true)
+      seterr('')
     }
+  } catch (error){
+    seterr(error.message);
+  }
   }
 
   //user logout
@@ -31,7 +38,7 @@ function UserLoginStore({ children }) {
   }
 
   return (
-    <Userlogincontext.Provider value={{ loginUser,logoutUser,userLoginStatus }}>
+    <Userlogincontext.Provider value={{ loginUser,logoutUser,userLoginStatus,err,currentUser,setCurrentUser }}>
       {children}
     </Userlogincontext.Provider>
   );

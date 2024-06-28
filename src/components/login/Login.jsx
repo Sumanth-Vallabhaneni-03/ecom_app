@@ -4,10 +4,11 @@ import {useContext} from 'react';
 import { Userlogincontext } from "../../context/Userlogincontext";
 import {useNavigate} from 'react-router-dom'
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function Login() {
 
-  let { loginUser,userLoginStatus}=useContext(Userlogincontext)
+  let { loginUser,userLoginStatus,err}=useContext(Userlogincontext)
   //const [userLoginErr, setUserLoginErr] = useState('')
   const navigate=useNavigate()
 
@@ -35,7 +36,7 @@ function Login() {
   
   return (
     <div className="phil">
-      <p className="display-3 text-center">User Login</p>
+      <p className="display-5 mt-5 text-center">Login</p>
       {/* registration form */}
       <div className="row ">
         <div className="col-11 col-sm-10 col-md-6 mx-auto">
@@ -43,6 +44,9 @@ function Login() {
           {/* {setUserLoginStatus===false &&userLoginErr.length!==0&& (
             <p className="fs-2 text-danger text-center">{err}</p>
           )} */}
+          {
+            err.length!==0&&<p className="phil text-danger d-3">{err}</p>
+          }
           <form
             className="mx-auto mt-5 bg-light p-3"
             onSubmit={handleSubmit(onUserLogin)}
@@ -81,9 +85,14 @@ function Login() {
             </div>
 
             {/* submit button */}
-            <button className="btn btn-success" type="submit">
+            <div className="text-center">
+            <button className="btn btn-success kk" type="submit">
               Login
             </button>
+            </div>
+            <div className="d-flex flex-row">
+            <p>If you don't have an account<Link to='../register' className='nav-link text-info'>Register</Link></p>
+            </div>
           </form>
         </div>
       </div>
